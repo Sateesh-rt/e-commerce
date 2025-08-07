@@ -93,7 +93,8 @@ public class ProductServiceImpl implements ProductService {
 			Product product = productOpt.get();
 
 			// ✅ Delete image file from disk
-			String imagePath = product.getImagePath(); // This must be full path
+			String imagePath = product.getImagePath();
+			// This must be full path
 			File imageFile = new File(imagePath);
 
 			if (imageFile.exists()) {
