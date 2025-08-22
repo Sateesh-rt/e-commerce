@@ -21,35 +21,4 @@ public interface ProductService {
 
 }
 
-//@Autowired
-//private ProductRepository productRepository;
-//
-//
-//public Product addProduct(Product p) {
-//    return productRepository.save(p);
-//}
-//
-//public List<Product> getAll() {
-//    return productRepository.findAll();
-//}
-//
-//public Product updateProduct(Long id, ProductDTO dto) throws IOException {
-//    Product product = productRepository.findById(id)
-//        .orElseThrow(() -> new RuntimeException("Product not found"));
-//
-//    product.setName(dto.getName());
-//    product.setDescription(dto.getDescription());
-//    product.setPrice(dto.getPrice());
-//    product.setCategory(dto.getCategory());
-//
-//    if (dto.getImage() != null && !dto.getImage().isEmpty()) {
-//        product.setImage(dto.getImage().getBytes());
-//    }
-//
-//    return productRepository.save(product);
-//}
-//
-//
-//public void deleteProduct(Long id) {
-//     productRepository.deleteById(id);
-//}
+

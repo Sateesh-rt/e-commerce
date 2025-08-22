@@ -22,60 +22,33 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository repo;
+	
 	@Autowired
 	private ObjectMapper objectMapper;
+
 	
 	
 	@Override
 	public Product saveProduct(MultipartFile image, ProductDTO dto) throws IOException {
-	    String folderPath = System.getProperty("user.dir") + "/uploads";
-	    Path uploadDir = Paths.get(folderPath);
-	    Files.createDirectories(uploadDir);
+	    String folderPath = System.getProperty("user.dir") + "/uploads";// String path
+	    Path uploadDir = Paths.get(folderPath);// converted to String path to pathObject
+	    Files.createDirectories(uploadDir);// create directory folder search
 
-	    String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-	    Path filePath = uploadDir.resolve(fileName);
-	    Files.write(filePath, image.getBytes());
+	    String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();// uniqueno and filename
+	    Path filePath = uploadDir.resolve(fileName);// appends filename to folderPath
+	    Files.write(filePath, image.getBytes());// read into byteArray and save it
 
 	    // ✅ Use ObjectMapper to convert DTO to Entity
-	    Product product = objectMapper.convertValue(dto, Product.class);
+	    Product p = objectMapper.convertValue(dto,Product.class);
 
 	    // ✅ Set the image path manually (since it's not part of DTO)
-	    product.setImagePath(filePath.toString());
+	    p.setImagePath(filePath.toString());
 
-	    return repo.save(product);
+	    return repo.save(p);
 	}
 
 
-//	@Override
-//	public Product saveProduct(MultipartFile image, ProductDTO dto) throws IOException {
-//		// Safe uploads folder relative to your project root
-//		String folderPath = System.getProperty("user.dir") + "/uploads";
-//
-//		// Ensure uploads directory exists
-//		Path uploadDir = Paths.get(folderPath);
-//		Files.createDirectories(uploadDir);
-//
-//		// Create unique file name
-//		String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-//		Path filePath = uploadDir.resolve(fileName);
-//
-//		// Save image to disk
-//		Files.write(filePath, image.getBytes());
-//
-//		// Create and populate product
-//		Product p = new Product();
-//		p.setName(dto.getName());
-//		p.setDescription(dto.getDescription());
-//		p.setPrice(dto.getPrice());
-//		p.setCategory(dto.getCategory());
-//
-//		// Save only filename or relative path
-//		p.setImagePath(filePath.toString());
-//
-//		// You can just store filename
-//
-//		return repo.save(p);
-//	}
+
 
 	@Override
 	public List<Product> getAllProducts() {
