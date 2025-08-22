@@ -93,6 +93,14 @@ public class CartController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return cartRepository.findByUser(user);
     }
+    @GetMapping("/{userId}/items")
+    public List<Cart> getCartData(@PathVariable Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return cartRepository.findByUser(user);
+    }
+    
+    
 }
 
 
