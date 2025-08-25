@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -76,8 +77,12 @@ public class ProductController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+		try {
 		service.deleteProduct(id);
 		return ResponseEntity.ok().build();
+		}catch(Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Id Not Found "+id);
+		}
 	}
 
 	@PutMapping("/{id}")
@@ -88,20 +93,18 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id) throws Exception {
+	public ResponseEntity<?> getProductById(@PathVariable Long id) throws IOException   {
 		Product product = service.getProductById(id);
 
 		ProductResponse response = objectMapper.convertValue(product, ProductResponse.class);
-//		response.setId(product.getId());
-//		response.setName(product.getName());
-//		response.setDescription(product.getDescription());
-//		response.setPrice(product.getPrice());
-//		response.setCategory(product.getCategory());
-
-		String fileName = new File(product.getImagePath()).getName(); // Extract file name
+         String fileName = new File(product.getImagePath()).getName(); // Extract file name
 		String imageUrl = "http://localhost:9090/uploads/" + fileName;
 		response.setImageUrl(imageUrl);
-
+         
 		return ResponseEntity.ok(response);
+		
+         
 	}
+	
+	
 }

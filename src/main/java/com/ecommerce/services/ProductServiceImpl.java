@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product updateProduct(Long id, ProductDTO dto, MultipartFile image) throws IOException {
 		Product p = repo.findById(id).orElseThrow();
-
+             
 		// Update text fields
 		p.setName(dto.getName());
 		p.setDescription(dto.getDescription());

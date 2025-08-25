@@ -5,6 +5,13 @@ public class CartResponse {
     private Double price;
     private Integer quantity;
     private String imagePath;
+    private String imageUrl;
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 	public String getProductName() {
 		return productName;
 	}

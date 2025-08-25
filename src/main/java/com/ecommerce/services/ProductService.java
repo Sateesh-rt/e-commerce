@@ -9,15 +9,15 @@ import com.ecommerce.dto.ProductDTO;
 import com.ecommerce.model.Product;
 
 public interface ProductService {
-	Product saveProduct(MultipartFile image, ProductDTO dto) throws IOException;
+	public Product saveProduct(MultipartFile image, ProductDTO dto) throws IOException;
 
-	List<Product> getAllProducts();
+	public List<Product> getAllProducts();
 
-	void deleteProduct(Long id);
+	public void deleteProduct(Long id);
 
-	Product updateProduct(Long id, ProductDTO dto, MultipartFile image) throws IOException;
+	public Product updateProduct(Long id, ProductDTO dto, MultipartFile image) throws IOException;
 
-	Product getProductById(Long id);
+	 public Product getProductById(Long id);
 
 }
 
